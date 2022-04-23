@@ -365,15 +365,15 @@ def mostrarConjuntoPrediccion():
     lstConjuntoPrediccion.delete(0, END)
     lstConjuntoPrediccion.insert(END, "\n---- CONJUNTO PREDICCIÓN ----", "")
 
-    for nombreNoterminal in dicReglasLimpias:
-        rhs = dicReglasLimpias[nombreNoterminal]
+    for nombreNoTerminal in dicReglasLimpias:
+        rhs = dicReglasLimpias[nombreNoTerminal]
         for produccionDeNT in rhs:
             resultadoConjuntoProduccion = calcularPrimeros(produccionDeNT)
 
             if '#' in resultadoConjuntoProduccion:
                 if type(resultadoConjuntoProduccion) == str:
                     siguientePrimero = []
-                    siguienteOp = dicSiguientes[nombreNoterminal]
+                    siguienteOp = dicSiguientes[nombreNoTerminal]
                     if siguienteOp is str:
                         siguientePrimero.append(siguienteOp)
                     else:
@@ -383,7 +383,7 @@ def mostrarConjuntoPrediccion():
                 else:
                     resultadoConjuntoProduccion.remove('#')
                     resultadoConjuntoProduccion = list(resultadoConjuntoProduccion) + \
-                                  list(dicSiguientes[nombreNoterminal])
+                                  list(dicSiguientes[nombreNoTerminal])
 
             # Agregar reglas a la tabla
             tablaTemporal = []
@@ -391,22 +391,22 @@ def mostrarConjuntoPrediccion():
                 tablaTemporal.append(resultadoConjuntoProduccion)
                 resultadoConjuntoProduccion = copy.deepcopy(tablaTemporal)
             for c in resultadoConjuntoProduccion:
-                xNoTerminal = listaNoTerminales.index(nombreNoterminal)
+                xNoTerminal = listaNoTerminales.index(nombreNoTerminal)
                 yTerminal = copiaTerminales.index(c)
                 if matriz[xNoTerminal][yTerminal] == '':
                     matriz[xNoTerminal][yTerminal] = matriz[xNoTerminal][yTerminal] \
-                                   + f"{nombreNoterminal}->{' '.join(produccionDeNT)}"
+                                   + f"{nombreNoTerminal}->{' '.join(produccionDeNT)}"
 
                 else:
 
                     # Si la regla ya esta presente
-                    if f"{nombreNoterminal}->{produccionDeNT}" in matriz[xNoTerminal][yTerminal]:
+                    if f"{nombreNoTerminal}->{produccionDeNT}" in matriz[xNoTerminal][yTerminal]:
                         continue
                     else:
                         esGramaticaLL1 = False
                         matriz[xNoTerminal][yTerminal] = matriz[xNoTerminal][yTerminal] \
-                                       + f",{nombreNoterminal}->{' '.join(produccionDeNT)}"
-            lstConjuntoPrediccion.insert(END, f"CP({nombreNoterminal} -> {''.join(produccionDeNT)}) => {set(resultadoConjuntoProduccion)}")
+                                       + f",{nombreNoTerminal}->{' '.join(produccionDeNT)}"
+            lstConjuntoPrediccion.insert(END, f"CP({nombreNoTerminal} -> {''.join(produccionDeNT)}) => {set(resultadoConjuntoProduccion)}")
 
     if esGramaticaLL1 == True:
         lstEsGramaticaLL1.delete(0, END)
