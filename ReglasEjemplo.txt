@@ -1,0 +1,31 @@
+# => Lambda
+
+-------------------- SI -----------------------
+reglas = E -> E + T | T,
+         T -> T * F | F,
+         F -> id | ( E )
+
+noTerminales = E, T, F
+terminales = id, +, *, (, )
+
+
+-------------------- SI -----------------------
+reglas = S -> A k f,
+         A -> A d | a B | a C,
+         C -> c,
+         B -> b B C | r
+
+noTerminales = A, B, C
+terminales = k, f, d, a, c, b, r
+
+
+------------------- NO ----------------------
+reglas = S -> A B C | C,
+         A -> a | b B | #,
+         B -> p | #,
+         C -> c
+
+noTerminales = A, S, B, C
+terminales = a, c, b, p
+
+
