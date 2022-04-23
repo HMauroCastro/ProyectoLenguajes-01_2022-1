@@ -163,8 +163,8 @@ def eliminarFactorizacionIzquierda(dicReglasALimpiar):
         dicReglasNuevas[regla] = dicReglasExpandidasFactorizacion
 
         # Adicionar las nuevas reglas y retornar Reglas limpias
-        for regla in dicReglasConFactorizacion:
-            dicReglasNuevas[regla] = dicReglasConFactorizacion[regla]
+        for key in dicReglasConFactorizacion:
+            dicReglasNuevas[key] = dicReglasConFactorizacion[key]
     return dicReglasNuevas
 
 
@@ -332,9 +332,11 @@ def mostrarSiguientes():
     for nombreRegla in dicReglasLimpias:
         conjuntoSiguientes = set()
         resultado = calcularSiguientes(nombreRegla)
+        print(resultado)
         if resultado is not None:
             for g in resultado:
                 conjuntoSiguientes.add(g)
+
         dicSiguientes[nombreRegla] = conjuntoSiguientes
         lstSiguientes.insert(END, f"Siguientes({nombreRegla})" f" => {conjuntoSiguientes}")
 
@@ -434,11 +436,11 @@ def iniciarPrograma():
         reglas = textReglas.get(1.0, END).split(',')
         terminales = quitarEspacios(txtTerminales.get().split(','))
         noTerminales = quitarEspacios(txtNoTerminales.get().split(','))
-        simboloInicial = noTerminales[0]
         dicReglasLimpias = {}
         dicPrimeros = {}
         dicSiguientes = {}
         mostrarPrimeros()
+        simboloInicial = list(dicReglasLimpias.keys())[0]
         mostrarSiguientes()
         mostrarConjuntoPrediccion()
 

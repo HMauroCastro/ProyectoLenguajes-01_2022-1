@@ -28,4 +28,3 @@ reglas = S -> A B C | C,
 noTerminales = A, S, B, C
 terminales = a, c, b, p
 
-
